@@ -1,0 +1,109 @@
+.login-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+}
+
+@media (max-width: 860px) {
+  .login-shell { grid-template-columns: 1fr; }
+  .brand-panel { min-height: 260px; }
+}
+
+/* ---------- Panel izquierdo: marca + índice del libro ---------- */
+.brand-panel {
+  background: var(--ink);
+  padding: 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--rule);
+}
+
+.wordmark {
+  font-size: 1.6rem;
+  font-style: italic;
+  color: var(--parchment);
+}
+.wordmark span { color: var(--gold); font-style: normal; }
+
+.brand-tagline {
+  color: var(--mist);
+  font-size: 0.95rem;
+  max-width: 32ch;
+  line-height: 1.5;
+  margin-top: 0.75rem;
+}
+
+.ledger-index {
+  margin-top: auto;
+}
+.ledger-index .index-row {
+  display: flex;
+  gap: 1.25rem;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--rule);
+  color: var(--mist-dim);
+  font-size: 0.85rem;
+}
+.ledger-index .index-row:last-child { border-bottom: 1px solid var(--rule); }
+.ledger-index .folio {
+  font-family: var(--font-mono);
+  color: var(--gold-dim);
+  width: 2.4ch;
+}
+
+/* ---------- Panel derecho: formulario ---------- */
+.form-panel {
+  background: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-card {
+  background: var(--parchment);
+  color: var(--ink);
+  width: 100%;
+  max-width: 380px;
+  padding: 2.75rem 2.5rem;
+  border-radius: var(--radius);
+}
+
+.login-card h1 {
+  font-size: 1.7rem;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+.login-card .subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--mist-dim);
+  margin-bottom: 2rem;
+}
+
+.login-card .btn-primary {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--mist-dim);
+}
+
+.form-error {
+  display: none;
+  background: rgba(181, 83, 60, 0.1);
+  border-left: 2px solid var(--clay);
+  color: var(--clay);
+  font-size: 0.82rem;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1.25rem;
+}
+.form-error.visible { display: block; }
