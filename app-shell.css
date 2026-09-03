@@ -1,0 +1,134 @@
+/* ============================================
+   APP SHELL — Riel de navegación + área principal
+   Tema claro, compartido por todos los módulos
+   ============================================ */
+
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--rail-width) 1fr;
+  min-height: 100vh;
+  background: var(--ink);
+}
+
+/* ---------- Riel lateral ---------- */
+.rail {
+  background: var(--ink-soft);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 0;
+}
+
+.rail-brand {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 2rem;
+  flex-shrink: 0;
+}
+.rail-brand img { width: 100%; height: 100%; object-fit: contain; }
+
+.rail-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.rail-item {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: var(--mist-dim);
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.rail-item svg { width: 20px; height: 20px; }
+
+.rail-item:hover {
+  color: var(--teal);
+  background: var(--graphite);
+}
+
+.rail-item.active {
+  color: var(--gold);
+  background: rgba(27, 75, 121, 0.10);
+}
+.rail-item.active::before {
+  content: '';
+  position: absolute;
+  left: -13px;
+  width: 3px;
+  height: 22px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.rail-item.disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* tooltip — mantenemos alto contraste (oscuro) aunque el tema sea claro */
+.rail-item[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #16233A;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 20;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(16, 35, 56, 0.18);
+}
+
+.rail-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* ---------- Área principal ---------- */
+.main-area {
+  padding: 2.25rem 2.75rem 3rem;
+  max-width: 1180px;
+  width: 100%;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.75rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+  color: var(--parchment);
+}
+.page-subtitle {
+  color: var(--mist);
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+  max-width: 46ch;
+}
+
+@media (max-width: 720px) {
+  .app-shell { grid-template-columns: 60px 1fr; }
+  .main-area { padding: 1.5rem 1.1rem 2.5rem; }
+  .rail-item[data-tooltip]:hover::after { display: none; }
+}

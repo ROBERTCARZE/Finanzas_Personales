@@ -1,0 +1,240 @@
+/* ============================================
+   MÓDULO 2 — Transacciones (tema claro)
+   ============================================ */
+
+/* ---------- Barra de filtros ---------- */
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+}
+
+.filters-bar input,
+.filters-bar select {
+  background: var(--ink);
+  border: 1px solid var(--rule);
+  color: var(--parchment);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 7px;
+}
+.filters-bar input:focus,
+.filters-bar select:focus {
+  border-color: var(--teal);
+  outline: none;
+}
+.filters-bar input[type="search"] { min-width: 200px; flex: 1; }
+
+/* ---------- Panel del listado ---------- */
+.ledger-panel {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(16, 35, 56, 0.04);
+}
+
+.ledger-panel-head {
+  display: grid;
+  grid-template-columns: 56px 100px 1.6fr 1fr 130px;
+  gap: 1rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mist-dim);
+  background: var(--graphite);
+  border-bottom: 1px solid var(--rule);
+}
+
+.ledger-body { max-height: 560px; overflow-y: auto; }
+
+.tx-row {
+  display: grid;
+  grid-template-columns: 56px 100px 1.6fr 1fr 130px;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.tx-row:last-child { border-bottom: none; }
+.tx-row:hover { background: var(--graphite); }
+
+.tx-folio { color: var(--mist-dim); font-size: 0.8rem; }
+.tx-date { color: var(--mist); font-size: 0.85rem; }
+
+.tx-desc .tx-category { color: var(--parchment); font-size: 0.92rem; font-weight: 500; }
+.tx-desc .tx-meta { color: var(--mist); font-size: 0.8rem; margin-top: 0.15rem; }
+.tx-desc .tx-tags { margin-top: 0.35rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.tag-chip {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--teal);
+  background: rgba(27, 75, 121, 0.08);
+  padding: 0.15rem 0.5rem;
+  border-radius: 5px;
+}
+
+.tx-type-badge {
+  font-size: 0.72rem;
+  padding: 0.28rem 0.65rem;
+  border-radius: 20px;
+  width: fit-content;
+  font-family: var(--font-ui);
+  font-weight: 600;
+}
+.tx-type-badge.income { color: var(--sage); background: rgba(22, 163, 116, 0.10); }
+.tx-type-badge.expense { color: var(--clay); background: rgba(229, 72, 77, 0.10); }
+.tx-type-badge.transfer { color: var(--teal); background: rgba(27, 75, 121, 0.10); }
+.tx-type-badge.debt_payment { color: #B7791F; background: rgba(183, 121, 31, 0.10); }
+
+.tx-amount { text-align: right; font-size: 0.98rem; font-weight: 500; }
+.tx-amount.income { color: var(--sage); }
+.tx-amount.expense, .tx-amount.debt_payment { color: var(--clay); }
+.tx-amount.transfer { color: var(--parchment-dim); }
+
+.tx-amount.blurred { filter: blur(5px); user-select: none; }
+
+.empty-state {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--mist-dim);
+  font-size: 0.88rem;
+}
+
+/* ============================================
+   Panel deslizante — Nueva transacción
+   ============================================ */
+.tx-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 35, 56, 0.45);
+  display: none;
+  z-index: 50;
+}
+.tx-overlay.open { display: block; }
+
+.tx-drawer {
+  position: absolute;
+  top: 0; right: 0;
+  width: 420px;
+  max-width: 92vw;
+  height: 100%;
+  background: #FFFFFF;
+  color: var(--parchment);
+  padding: 2rem 2rem 2.5rem;
+  overflow-y: auto;
+  box-shadow: -18px 0 40px rgba(16, 35, 56, 0.14);
+}
+
+.tx-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.tx-drawer-header h2 { font-size: 1.35rem; color: var(--parchment); }
+.tx-drawer-close {
+  background: var(--graphite);
+  border: none;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: var(--mist);
+  cursor: pointer;
+  line-height: 1;
+}
+.tx-drawer-close:hover { color: var(--parchment); }
+
+/* Selector de tipo (segmentado) */
+.type-toggle {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+.type-toggle button {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.6rem 0.3rem;
+  border-radius: 7px;
+  border: 1px solid var(--rule);
+  background: var(--ink);
+  color: var(--mist);
+  cursor: pointer;
+  text-align: center;
+}
+.type-toggle button.active { border-color: transparent; }
+.type-toggle button[data-type="income"].active { background: var(--sage); color: #fff; }
+.type-toggle button[data-type="expense"].active { background: var(--clay); color: #fff; }
+.type-toggle button[data-type="transfer"].active { background: var(--teal); color: #fff; }
+.type-toggle button[data-type="debt_payment"].active { background: #B7791F; color: #fff; }
+
+.tx-drawer .field select {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  color: var(--parchment);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  padding: 0.7rem 0.8rem;
+}
+.tx-drawer .field select:focus { border-color: var(--teal); outline: none; }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.new-category-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: -0.6rem;
+  margin-bottom: 1.25rem;
+}
+.new-category-row input {
+  flex: 1;
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.85rem;
+}
+.new-category-row button {
+  background: var(--teal);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.hidden { display: none !important; }
+
+.amount-input-wrap {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0 0.9rem;
+}
+.amount-input-wrap span { color: var(--mist); font-family: var(--font-mono); }
+.amount-input-wrap input {
+  border: none !important;
+  background: transparent !important;
+  font-family: var(--font-mono);
+  font-size: 1.05rem !important;
+  padding: 0.75rem 0.4rem !important;
+}
+.amount-input-wrap input:focus { box-shadow: none !important; }
+
+.tx-drawer .btn-primary {
+  width: 100%;
+  margin-top: 0.5rem;
+}

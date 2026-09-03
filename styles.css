@@ -1,0 +1,132 @@
+/* ============================================
+   SISTEMA DE DISEÑO — Fintech moderno / claro
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Color — neutros claros + azul marino de marca */
+  --ink: #F5F7FA;          /* fondo base de la app (claro) */
+  --ink-soft: #FFFFFF;     /* superficies: sidebar, tarjetas */
+  --graphite: #EDF1F6;     /* superficie secundaria (hover, chips) */
+  --parchment: #16233A;    /* texto principal (oscuro) */
+  --parchment-dim: #33465F;/* texto secundario */
+  --mist: #64748B;         /* texto muted */
+  --mist-dim: #94A3B8;     /* texto muted claro / metadatos */
+  --rule: #E3E8EF;         /* bordes y divisores */
+
+  --teal: #1B4B79;         /* azul marino — acción primaria */
+  --teal-light: #2E6DA4;   /* azul marino hover */
+  --gold: #1B4B79;         /* alias: acento primario (antes dorado) */
+  --gold-dim: #4C7CAE;     /* acento secundario / foco */
+
+  --sage: #16A374;         /* ingresos / positivo */
+  --clay: #E5484D;         /* gastos / deuda / negativo */
+
+  /* Tipografía */
+  --font-display: 'Sora', sans-serif;
+  --font-ui: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Layout */
+  --rail-width: 72px;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .figure {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.mono, .amount {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--gold-dim);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Botón primario ---------- */
+.btn-primary {
+  background: var(--gold);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 1.4rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.btn-primary:hover { background: var(--gold-dim); }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--mist);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+}
+.btn-text:hover { color: var(--teal); }
+
+/* ---------- Campos de formulario ---------- */
+.field { margin-bottom: 1.25rem; }
+.field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--parchment-dim);
+  margin-bottom: 0.4rem;
+}
+.field input {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  color: var(--parchment);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  padding: 0.75rem 0.9rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field input:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(27, 75, 121, 0.12);
+  outline: none;
+}
+.field input::placeholder { color: var(--mist-dim); }
+
+/* ---------- Renglón de libro contable (heredado; se sigue usando en listados) ---------- */
+.ledger-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.ledger-row:last-child { border-bottom: none; }
