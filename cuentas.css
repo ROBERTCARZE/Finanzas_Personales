@@ -1,0 +1,259 @@
+/* ============================================
+   MÓDULO 4 — Cuentas y Activos
+   ============================================ */
+
+/* ---------- KPIs ---------- */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.kpi-card {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.kpi-label {
+  font-size: 0.78rem;
+  color: var(--mist);
+  font-weight: 500;
+}
+.kpi-value {
+  font-size: 1.4rem;
+  color: var(--parchment);
+}
+.kpi-value.kpi-clay { color: var(--clay); }
+.kpi-value.kpi-sage { color: var(--sage); }
+
+@media (max-width: 720px) {
+  .kpi-row { grid-template-columns: 1fr; }
+}
+
+/* ---------- Secciones ---------- */
+.section-block { margin-bottom: 2.5rem; }
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.section-head h2 {
+  font-size: 1.05rem;
+  color: var(--parchment);
+}
+
+.btn-sm { padding: 0.55rem 1rem; font-size: 0.82rem; }
+
+/* ---------- Grilla de tarjetas ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.entity-card {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.entity-card:hover {
+  border-color: var(--teal);
+  box-shadow: 0 4px 14px rgba(16, 35, 56, 0.08);
+}
+
+.entity-card .card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.9rem;
+}
+.entity-card .card-name { font-size: 1rem; font-weight: 600; color: var(--parchment); }
+.entity-card .card-sub { font-size: 0.78rem; color: var(--mist); margin-top: 0.15rem; }
+
+.type-pill {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  background: var(--graphite);
+  color: var(--parchment-dim);
+  white-space: nowrap;
+}
+
+.entity-card .card-amount {
+  font-size: 1.3rem;
+  color: var(--parchment);
+}
+.entity-card .card-amount.negative { color: var(--clay); }
+.card-amount.blurred, .kpi-value.blurred { filter: blur(6px); user-select: none; }
+.entity-card .card-amount-label {
+  font-size: 0.72rem;
+  color: var(--mist);
+  margin-top: 0.1rem;
+}
+
+/* ---------- Barra de progreso (deudas) ---------- */
+.progress-track {
+  height: 6px;
+  background: var(--graphite);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0.9rem 0 0.6rem;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--sage);
+  border-radius: 4px;
+}
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--mist);
+}
+
+.card-footer-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.78rem;
+  color: var(--mist);
+}
+.card-footer-row strong { color: var(--parchment-dim); font-weight: 500; }
+
+.empty-cell {
+  color: var(--mist-dim);
+  font-size: 0.85rem;
+  padding: 1.5rem;
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius);
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+/* ============================================
+   Drawers (cuenta / deuda)
+   ============================================ */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 35, 56, 0.45);
+  display: none;
+  z-index: 50;
+}
+.drawer-overlay.open { display: block; }
+
+.drawer-panel {
+  position: absolute;
+  top: 0; right: 0;
+  width: 420px;
+  max-width: 92vw;
+  height: 100%;
+  background: #FFFFFF;
+  color: var(--parchment);
+  padding: 2rem 2rem 2.5rem;
+  overflow-y: auto;
+  box-shadow: -18px 0 40px rgba(16, 35, 56, 0.14);
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.drawer-header h2 { font-size: 1.35rem; color: var(--parchment); }
+.drawer-close {
+  background: var(--graphite);
+  border: none;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: var(--mist);
+  cursor: pointer;
+  line-height: 1;
+}
+.drawer-close:hover { color: var(--parchment); }
+
+.drawer-panel .field select {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  color: var(--parchment);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  padding: 0.7rem 0.8rem;
+}
+.drawer-panel .field select:focus { border-color: var(--teal); outline: none; }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.hidden { display: none !important; }
+
+.amount-input-wrap {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0 0.9rem;
+}
+.amount-input-wrap span { color: var(--mist); font-family: var(--font-mono); }
+.amount-input-wrap input {
+  border: none !important;
+  background: transparent !important;
+  font-family: var(--font-mono);
+  font-size: 1.05rem !important;
+  padding: 0.75rem 0.4rem !important;
+}
+.amount-input-wrap input:focus { box-shadow: none !important; }
+
+.type-toggle {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+.type-toggle-2 { grid-template-columns: repeat(2, 1fr); }
+.type-toggle button {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.65rem 0.3rem;
+  border-radius: 7px;
+  border: 1px solid var(--rule);
+  background: var(--ink);
+  color: var(--mist);
+  cursor: pointer;
+  text-align: center;
+}
+.type-toggle button.active {
+  border-color: transparent;
+  background: var(--teal);
+  color: #fff;
+}
+
+.drawer-panel .btn-primary { width: 100%; margin-top: 0.5rem; }
+
+.btn-delete {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--clay);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  text-align: center;
+}
+.btn-delete:hover { text-decoration: underline; }
