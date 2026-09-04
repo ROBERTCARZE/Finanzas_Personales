@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuentas y Activos — Robert Carrillo Zeña</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="app-shell.css" />
+  <link rel="stylesheet" href="cuentas.css" />
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- ============ Riel de navegación ============ -->
+    <aside class="rail">
+      <div class="rail-brand"><img src="logo.png" alt="Robert Carrillo Zeña" /></div>
+
+      <nav class="rail-nav">
+        <a class="rail-item" href="dashboard.html" data-tooltip="Panel de control">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/></svg>
+        </a>
+        <a class="rail-item" href="transacciones.html" data-tooltip="Transacciones">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h13M17 8l-3.5-3.5M17 8l-3.5 3.5"/><path d="M20 16H7M7 16l3.5-3.5M7 16l3.5 3.5"/></svg>
+        </a>
+        <a class="rail-item" href="presupuestos.html" data-tooltip="Presupuestos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5V6M12 18v2.5M3.5 12H6M18 12h2.5"/></svg>
+        </a>
+        <a class="rail-item active" href="cuentas.html" data-tooltip="Cuentas y Activos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 9.5 12 4l8.5 5.5"/><path d="M4.5 9.5v9M9 9.5v9M15 9.5v9M19.5 9.5v9"/><path d="M3 19h18"/></svg>
+        </a>
+        <a class="rail-item disabled" data-tooltip="Objetivos de Ahorro (próximamente)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3.5v17"/><path d="M6 4.5h11l-3 3.5 3 3.5H6"/></svg>
+        </a>
+      </nav>
+
+      <div class="rail-footer">
+        <button class="rail-item" id="privacyBtn" data-tooltip="Modo discreto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+        <button class="rail-item" id="logoutBtn" data-tooltip="Cerrar sesión">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 20H5.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1H9"/><path d="M16 16.5 21 12l-5-4.5"/><path d="M21 12H9"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ============ Área principal ============ -->
+    <main class="main-area">
+
+      <header class="page-header">
+        <div>
+          <h1>Cuentas y Activos</h1>
+          <p class="page-subtitle">El mapa completo de tu patrimonio: lo que tienes, dónde lo tienes y lo que debes.</p>
+        </div>
+      </header>
+
+      <section class="kpi-row">
+        <div class="kpi-card">
+          <span class="kpi-label">Liquidez total</span>
+          <span class="kpi-value mono" id="kpiLiquidity">S/ 0.00</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Deuda total</span>
+          <span class="kpi-value mono kpi-clay" id="kpiDebt">S/ 0.00</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Patrimonio neto</span>
+          <span class="kpi-value mono kpi-sage" id="kpiNetWorth">S/ 0.00</span>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-head">
+          <h2>Cuentas y Bancos</h2>
+          <button class="btn-primary btn-sm" id="newAccountBtn">+ Nueva cuenta</button>
+        </div>
+        <div class="card-grid" id="accountsGrid"></div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-head">
+          <h2>Préstamos y Terreno</h2>
+          <button class="btn-primary btn-sm" id="newDebtBtn">+ Nuevo compromiso</button>
+        </div>
+        <div class="card-grid" id="debtsGrid"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ============ Drawer: cuenta ============ -->
+  <div class="drawer-overlay" id="accountOverlay">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h2 id="accountDrawerTitle">Nueva cuenta</h2>
+        <button class="drawer-close" id="closeAccountBtn">×</button>
+      </div>
+
+      <form id="accountForm">
+        <div class="field">
+          <label for="accName">Nombre</label>
+          <input type="text" id="accName" placeholder="Ej. BCP Ahorros" required />
+        </div>
+
+        <div class="field">
+          <label for="accType">Tipo</label>
+          <select id="accType">
+            <option value="bank">Banco</option>
+            <option value="cash">Efectivo</option>
+            <option value="digital_wallet">Billetera digital (Yape/Plin)</option>
+            <option value="credit_card">Tarjeta de crédito</option>
+          </select>
+        </div>
+
+        <div class="field-row bank-only">
+          <div class="field">
+            <label for="accBankName">Banco</label>
+            <input type="text" id="accBankName" placeholder="Ej. BCP" />
+          </div>
+          <div class="field">
+            <label for="accNumber">N° de cuenta</label>
+            <input type="text" id="accNumber" />
+          </div>
+        </div>
+
+        <div class="field bank-only">
+          <label for="accCci">CCI</label>
+          <input type="text" id="accCci" />
+        </div>
+
+        <div class="field">
+          <label for="accBalance">Saldo actual</label>
+          <div class="amount-input-wrap">
+            <span>S/</span>
+            <input type="number" id="accBalance" step="0.01" value="0" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">Guardar cuenta</button>
+        <button type="button" class="btn-delete hidden" id="deleteAccountBtn">Eliminar cuenta</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ Drawer: préstamo / terreno ============ -->
+  <div class="drawer-overlay" id="debtOverlay">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h2 id="debtDrawerTitle">Nuevo compromiso</h2>
+        <button class="drawer-close" id="closeDebtBtn">×</button>
+      </div>
+
+      <form id="debtForm">
+        <div class="type-toggle type-toggle-2" id="debtTypeToggle">
+          <button type="button" data-type="loan" class="active">Préstamo</button>
+          <button type="button" data-type="land_financing">Terreno</button>
+        </div>
+
+        <div class="field">
+          <label for="debtName">Nombre</label>
+          <input type="text" id="debtName" placeholder="Ej. Préstamo 1" required />
+        </div>
+
+        <div class="field">
+          <label for="debtEntity">Entidad / Banco</label>
+          <input type="text" id="debtEntity" placeholder="Ej. BCP" />
+        </div>
+
+        <div class="field hidden" id="assetValueField">
+          <label for="debtAssetValue">Valor total del activo (terreno)</label>
+          <div class="amount-input-wrap">
+            <span>S/</span>
+            <input type="number" id="debtAssetValue" step="0.01" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="debtRemaining">Saldo pendiente</label>
+            <div class="amount-input-wrap">
+              <span>S/</span>
+              <input type="number" id="debtRemaining" step="0.01" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="debtMonthly">Cuota mensual</label>
+            <div class="amount-input-wrap">
+              <span>S/</span>
+              <input type="number" id="debtMonthly" step="0.01" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="debtDueDay">Día de vencimiento</label>
+            <input type="number" id="debtDueDay" min="1" max="31" />
+          </div>
+          <div class="field">
+            <label for="debtRemainingInst">Cuotas restantes</label>
+            <input type="number" id="debtRemainingInst" min="0" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="debtTotalInst">Cuotas totales</label>
+            <input type="number" id="debtTotalInst" min="0" />
+          </div>
+          <div class="field">
+            <label for="debtLateFees">Moras acumuladas</label>
+            <div class="amount-input-wrap">
+              <span>S/</span>
+              <input type="number" id="debtLateFees" step="0.01" value="0" />
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">Guardar compromiso</button>
+        <button type="button" class="btn-delete hidden" id="deleteDebtBtn">Eliminar compromiso</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="cuentas.js"></script>
+</body>
+</html>

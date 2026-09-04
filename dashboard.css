@@ -1,0 +1,144 @@
+/* ============================================
+   MÓDULO 1 — Dashboard
+   ============================================ */
+
+/* ---------- Alertas ---------- */
+.alerts-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+}
+.alert-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  border-left: 3px solid;
+}
+.alert-item.warning {
+  background: rgba(201, 162, 39, 0.08);
+  border-left-color: #B7791F;
+  color: #8A5A15;
+}
+.alert-item.danger {
+  background: rgba(229, 72, 77, 0.08);
+  border-left-color: var(--clay);
+  color: var(--clay);
+}
+
+/* ---------- KPIs ---------- */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.kpi-card {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.kpi-label { font-size: 0.78rem; color: var(--mist); font-weight: 500; }
+.kpi-value { font-size: 1.5rem; color: var(--parchment); }
+.kpi-value.kpi-clay { color: var(--clay); }
+.kpi-value.kpi-sage { color: var(--sage); }
+.kpi-value.blurred { filter: blur(6px); user-select: none; }
+
+@media (max-width: 720px) {
+  .kpi-row { grid-template-columns: 1fr; }
+}
+
+/* ---------- Widgets ---------- */
+.widgets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 900px) {
+  .widgets-grid { grid-template-columns: 1fr; }
+}
+
+.widget-card {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+}
+.widget-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+.widget-head h2 { font-size: 1rem; color: var(--parchment); }
+.widget-link { font-size: 0.8rem; color: var(--teal); text-decoration: none; font-weight: 500; }
+.widget-link:hover { text-decoration: underline; }
+
+/* comparación ingresos/gastos */
+.compare-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 100px;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.compare-row:last-child { margin-bottom: 0; }
+.compare-label { font-size: 0.82rem; color: var(--mist); }
+.compare-track { height: 10px; background: var(--graphite); border-radius: 6px; overflow: hidden; }
+.compare-fill { height: 100%; border-radius: 6px; transition: width 0.3s ease; }
+.compare-fill.income { background: var(--sage); }
+.compare-fill.expense { background: var(--clay); }
+.compare-value { font-size: 0.85rem; text-align: right; color: var(--parchment); }
+
+/* mini lista de presupuestos */
+.mini-budget-row { margin-bottom: 0.9rem; }
+.mini-budget-row:last-child { margin-bottom: 0; }
+.mini-budget-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--parchment-dim);
+  margin-bottom: 0.35rem;
+}
+.mini-budget-top strong { color: var(--parchment); font-weight: 500; }
+.mini-track { height: 6px; background: var(--graphite); border-radius: 4px; overflow: hidden; }
+.mini-fill { height: 100%; border-radius: 4px; }
+.mini-fill.green { background: var(--sage); }
+.mini-fill.yellow { background: #C9A227; }
+.mini-fill.red { background: var(--clay); }
+
+.widget-empty { color: var(--mist-dim); font-size: 0.85rem; text-align: center; padding: 1.5rem 0; }
+
+/* ---------- Accesos rápidos ---------- */
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.quick-btn {
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.2rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+.quick-btn:hover { background: var(--gold-dim); }
+.quick-btn-outline {
+  background: var(--ink-soft);
+  color: var(--parchment);
+  border: 1px solid var(--rule);
+}
+.quick-btn-outline:hover { background: var(--graphite); }
