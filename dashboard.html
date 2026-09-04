@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Control — Robert Carrillo Zeña</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="app-shell.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- ============ Riel de navegación ============ -->
+    <aside class="rail">
+      <div class="rail-brand"><img src="logo.png" alt="Robert Carrillo Zeña" /></div>
+
+      <nav class="rail-nav">
+        <a class="rail-item active" href="dashboard.html" data-tooltip="Panel de control">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/></svg>
+        </a>
+        <a class="rail-item" href="transacciones.html" data-tooltip="Transacciones">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h13M17 8l-3.5-3.5M17 8l-3.5 3.5"/><path d="M20 16H7M7 16l3.5-3.5M7 16l3.5 3.5"/></svg>
+        </a>
+        <a class="rail-item" href="presupuestos.html" data-tooltip="Presupuestos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5V6M12 18v2.5M3.5 12H6M18 12h2.5"/></svg>
+        </a>
+        <a class="rail-item" href="cuentas.html" data-tooltip="Cuentas y Activos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 9.5 12 4l8.5 5.5"/><path d="M4.5 9.5v9M9 9.5v9M15 9.5v9M19.5 9.5v9"/><path d="M3 19h18"/></svg>
+        </a>
+        <a class="rail-item" href="objetivos.html" data-tooltip="Objetivos de Ahorro">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3.5v17"/><path d="M6 4.5h11l-3 3.5 3 3.5H6"/></svg>
+        </a>
+      </nav>
+
+      <div class="rail-footer">
+        <button class="rail-item" id="privacyBtn" data-tooltip="Modo discreto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+        <button class="rail-item" id="logoutBtn" data-tooltip="Cerrar sesión">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 20H5.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1H9"/><path d="M16 16.5 21 12l-5-4.5"/><path d="M21 12H9"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ============ Área principal ============ -->
+    <main class="main-area">
+
+      <header class="page-header">
+        <div>
+          <h1 id="greeting">Hola de nuevo</h1>
+          <p class="page-subtitle" id="dateLabel">Tu radiografía financiera de hoy.</p>
+        </div>
+      </header>
+
+      <!-- Alertas prioritarias -->
+      <section class="alerts-stack" id="alertsStack"></section>
+
+      <!-- KPIs principales -->
+      <section class="kpi-row">
+        <div class="kpi-card">
+          <span class="kpi-label">Patrimonio Neto</span>
+          <span class="kpi-value mono" id="kpiNetWorth">S/ 0.00</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Balance Disponible</span>
+          <span class="kpi-value mono" id="kpiAvailable">S/ 0.00</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Ahorro del mes</span>
+          <span class="kpi-value mono" id="kpiSavings">S/ 0.00</span>
+        </div>
+      </section>
+
+      <!-- Widgets -->
+      <section class="widgets-grid">
+
+        <div class="widget-card">
+          <div class="widget-head">
+            <h2>Ingresos vs. Gastos del mes</h2>
+          </div>
+          <div class="compare-row">
+            <div class="compare-label">Ingresos</div>
+            <div class="compare-track"><div class="compare-fill income" id="incomeBar"></div></div>
+            <div class="compare-value mono" id="incomeValue">S/ 0.00</div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-label">Gastos</div>
+            <div class="compare-track"><div class="compare-fill expense" id="expenseBar"></div></div>
+            <div class="compare-value mono" id="expenseValue">S/ 0.00</div>
+          </div>
+        </div>
+
+        <div class="widget-card">
+          <div class="widget-head">
+            <h2>Presupuestos activos</h2>
+            <a class="widget-link" href="presupuestos.html">Ver todos →</a>
+          </div>
+          <div id="budgetsMiniList"></div>
+        </div>
+
+      </section>
+
+      <!-- Accesos rápidos -->
+      <section class="quick-actions">
+        <a class="quick-btn" href="transacciones.html?new=1">+ Registrar transacción</a>
+        <a class="quick-btn quick-btn-outline" href="cuentas.html?new=account">+ Nueva cuenta</a>
+        <a class="quick-btn quick-btn-outline" href="presupuestos.html?new=1">+ Nuevo presupuesto</a>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
