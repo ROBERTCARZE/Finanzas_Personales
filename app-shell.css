@@ -1,0 +1,198 @@
+/* ============================================
+   APP SHELL — Riel de navegación + área principal
+   Riel con categorías y texto, contraíble a solo íconos
+   ============================================ */
+
+:root {
+  --rail-width: 240px;
+  --rail-width-collapsed: 68px;
+}
+html.sidebar-collapsed { --rail-width: var(--rail-width-collapsed); }
+
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--rail-width) 1fr;
+  min-height: 100vh;
+  background: var(--ink);
+  transition: grid-template-columns 0.18s ease;
+}
+
+/* ---------- Riel lateral ---------- */
+.rail {
+  background: var(--ink-soft);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.1rem 0.7rem;
+  overflow: hidden;
+}
+
+.rail-top { display: flex; flex-direction: column; min-height: 0; }
+
+.rail-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.2rem;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+.rail-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  min-width: 0;
+}
+.rail-brand img { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
+.rail-brand-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--parchment);
+  white-space: nowrap;
+}
+
+.rail-toggle {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--graphite);
+  border: none;
+  border-radius: 7px;
+  color: var(--mist);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.rail-toggle:hover { color: var(--teal); }
+.rail-toggle svg { width: 15px; height: 15px; transition: transform 0.18s ease; }
+html.sidebar-collapsed .rail-toggle svg { transform: rotate(180deg); }
+
+.rail-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  overflow-y: auto;
+}
+
+.rail-section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mist-dim);
+  padding: 1rem 0.6rem 0.35rem;
+  white-space: nowrap;
+}
+
+.rail-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.65rem;
+  border-radius: 8px;
+  color: var(--mist-dim);
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 0.87rem;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.rail-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+.rail-item .label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rail-item:hover { color: var(--teal); background: var(--graphite); }
+
+.rail-item.active { color: var(--gold); background: rgba(27, 75, 121, 0.10); font-weight: 600; }
+.rail-item.active::before {
+  content: '';
+  position: absolute;
+  left: -0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.rail-item.disabled { opacity: 0.35; pointer-events: none; }
+
+.rail-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+
+/* ---------- Estado contraído: solo íconos, centrados ---------- */
+html.sidebar-collapsed .rail-brand-name,
+html.sidebar-collapsed .rail-section-label,
+html.sidebar-collapsed .rail-item .label {
+  display: none;
+}
+html.sidebar-collapsed .rail-brand-row { justify-content: center; flex-direction: column; gap: 0.6rem; }
+html.sidebar-collapsed .rail-item { justify-content: center; padding: 0.65rem; }
+html.sidebar-collapsed .rail-item.active::before { left: -0.9rem; }
+
+/* Tooltip — solo tiene sentido (y solo se muestra) cuando el riel está contraído */
+.rail-item[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #16233A;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 20;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(16, 35, 56, 0.18);
+  display: none;
+}
+html.sidebar-collapsed .rail-item[data-tooltip]:hover::after { display: block; }
+
+/* ---------- Área principal ---------- */
+.main-area {
+  padding: 2.25rem 2.75rem 3rem;
+  max-width: 1180px;
+  width: 100%;
+  min-width: 0;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.75rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.page-header h1 { font-size: 1.75rem; color: var(--parchment); }
+.page-subtitle { color: var(--mist); font-size: 0.9rem; margin-top: 0.35rem; max-width: 46ch; }
+
+@media (max-width: 720px) {
+  html:not(.sidebar-collapsed) .app-shell { grid-template-columns: var(--rail-width-collapsed) 1fr; }
+  html:not(.sidebar-collapsed) .rail-brand-name,
+  html:not(.sidebar-collapsed) .rail-section-label,
+  html:not(.sidebar-collapsed) .rail-item .label { display: none; }
+  html:not(.sidebar-collapsed) .rail-item { justify-content: center; }
+  html:not(.sidebar-collapsed) .rail-brand-row { justify-content: center; flex-direction: column; gap: 0.6rem; }
+  .main-area { padding: 1.5rem 1.1rem 2.5rem; }
+}
