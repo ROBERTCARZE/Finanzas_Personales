@@ -1,0 +1,117 @@
+/* ============================================
+   MÓDULO 10 — Horario Personal
+   ============================================ */
+
+.main-area-wide { max-width: 1400px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center; }
+.legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--mist); }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.dot.trabajo { background: #1B4B79; }
+.dot.gimnasio { background: #16A374; }
+.dot.personal { background: #C9A227; }
+.dot.estudio { background: #7A6BA8; }
+.dot.descanso { background: #94A3B8; }
+
+.schedule-layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (max-width: 1000px) { .schedule-layout { grid-template-columns: 1fr; } }
+
+.schedule-card {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 56px repeat(7, minmax(96px, 1fr));
+  grid-auto-rows: 34px;
+  min-width: 780px;
+  position: relative;
+}
+
+.grid-header {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--mist);
+  text-align: center;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  background: var(--ink-soft);
+}
+.hour-label {
+  font-size: 0.68rem;
+  color: var(--mist-dim);
+  text-align: right;
+  padding-right: 0.5rem;
+  border-top: 1px solid var(--rule);
+}
+.grid-cell {
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  cursor: pointer;
+}
+.grid-cell:hover { background: var(--graphite); }
+
+.schedule-block {
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 2px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 2;
+}
+.schedule-block.trabajo { background: #1B4B79; }
+.schedule-block.gimnasio { background: #16A374; }
+.schedule-block.personal { background: #C9A227; }
+.schedule-block.estudio { background: #7A6BA8; }
+.schedule-block.descanso { background: #94A3B8; }
+
+/* ---------- Panel de agenda ---------- */
+.agenda-panel {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.agenda-panel h2 { font-size: 0.95rem; color: var(--parchment); margin-bottom: 1rem; }
+.agenda-row { padding: 0.6rem 0; border-bottom: 1px solid var(--rule); font-size: 0.85rem; }
+.agenda-row:last-child { border-bottom: none; }
+.agenda-title { color: var(--parchment-dim); }
+.agenda-date { font-size: 0.75rem; color: var(--mist); margin-top: 0.1rem; }
+.widget-link { display: block; margin-top: 1rem; font-size: 0.8rem; color: var(--teal); text-decoration: none; font-weight: 500; }
+.widget-link:hover { text-decoration: underline; }
+.widget-empty { color: var(--mist-dim); font-size: 0.85rem; }
+
+/* ---------- Drawer ---------- */
+.drawer-overlay { position: fixed; inset: 0; background: rgba(16, 35, 56, 0.45); display: none; z-index: 50; }
+.drawer-overlay.open { display: block; }
+.drawer-panel {
+  position: absolute; top: 0; right: 0; width: 420px; max-width: 92vw; height: 100%;
+  background: #FFFFFF; color: var(--parchment); padding: 2rem 2rem 2.5rem; overflow-y: auto;
+  box-shadow: -18px 0 40px rgba(16, 35, 56, 0.14);
+}
+.drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.drawer-header h2 { font-size: 1.35rem; color: var(--parchment); }
+.drawer-close { background: var(--graphite); border: none; width: 30px; height: 30px; border-radius: 8px; font-size: 1.2rem; color: var(--mist); cursor: pointer; }
+.drawer-panel .field select {
+  width: 100%; background: #FFFFFF; border: 1px solid var(--rule); border-radius: 8px;
+  color: var(--parchment); font-family: var(--font-ui); font-size: 0.92rem; padding: 0.7rem 0.8rem;
+}
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.hidden { display: none !important; }
+.drawer-panel .btn-primary { width: 100%; margin-top: 0.5rem; }
+.btn-delete { width: 100%; background: none; border: none; color: var(--clay); font-family: var(--font-ui); font-size: 0.85rem; padding: 0.75rem; margin-top: 0.5rem; cursor: pointer; text-align: center; }
+.btn-delete:hover { text-decoration: underline; }

@@ -1,0 +1,102 @@
+/* ============================================
+   MÓDULO 11 — Registro de Gimnasio
+   ============================================ */
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.kpi-card {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.kpi-label { font-size: 0.78rem; color: var(--mist); font-weight: 500; }
+.kpi-value { font-size: 1.4rem; color: var(--parchment); }
+.kpi-value.kpi-clay { color: var(--clay); }
+.kpi-value-sm { font-size: 0.82rem; color: var(--parchment-dim); line-height: 1.4; }
+
+@media (max-width: 720px) { .kpi-row { grid-template-columns: 1fr; } }
+
+.gym-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 900px) { .gym-layout { grid-template-columns: 1fr; } }
+
+.widget-card {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+}
+.widget-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.widget-head h2 { font-size: 1rem; color: var(--parchment); }
+.widget-link-btn {
+  background: var(--graphite); border: none; color: var(--teal);
+  font-family: var(--font-ui); font-size: 0.78rem; font-weight: 600;
+  padding: 0.4rem 0.75rem; border-radius: 7px; cursor: pointer;
+}
+.widget-link-btn:hover { background: rgba(27, 75, 121, 0.12); }
+
+/* ---------- Calendario de asistencia ---------- */
+.checkin-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.4rem;
+}
+.checkin-day-label { font-size: 0.65rem; color: var(--mist-dim); text-align: center; }
+.checkin-cell {
+  aspect-ratio: 1;
+  border-radius: 7px;
+  border: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem;
+  color: var(--mist);
+  cursor: pointer;
+  background: var(--ink);
+}
+.checkin-cell.attended { background: var(--sage); color: #fff; border-color: var(--sage); font-weight: 600; }
+.checkin-cell.empty { visibility: hidden; }
+.checkin-cell.future { opacity: 0.4; cursor: default; }
+
+/* ---------- Bitácora / mediciones ---------- */
+.log-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.85rem;
+}
+.log-row:last-child { border-bottom: none; }
+.log-main { color: var(--parchment-dim); }
+.log-date { color: var(--mist); font-size: 0.78rem; }
+.widget-empty { color: var(--mist-dim); font-size: 0.85rem; }
+
+/* ---------- Drawer ---------- */
+.drawer-overlay { position: fixed; inset: 0; background: rgba(16, 35, 56, 0.45); display: none; z-index: 50; }
+.drawer-overlay.open { display: block; }
+.drawer-panel {
+  position: absolute; top: 0; right: 0; width: 400px; max-width: 92vw; height: 100%;
+  background: #FFFFFF; color: var(--parchment); padding: 2rem 2rem 2.5rem; overflow-y: auto;
+  box-shadow: -18px 0 40px rgba(16, 35, 56, 0.14);
+}
+.drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.drawer-header h2 { font-size: 1.3rem; color: var(--parchment); }
+.drawer-close { background: var(--graphite); border: none; width: 30px; height: 30px; border-radius: 8px; font-size: 1.2rem; color: var(--mist); cursor: pointer; }
+.drawer-panel .field select {
+  width: 100%; background: #FFFFFF; border: 1px solid var(--rule); border-radius: 8px;
+  color: var(--parchment); font-family: var(--font-ui); font-size: 0.92rem; padding: 0.7rem 0.8rem;
+}
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.amount-input-wrap { display: flex; align-items: center; background: #FFFFFF; border: 1px solid var(--rule); border-radius: 8px; padding: 0 0.9rem; }
+.amount-input-wrap span { color: var(--mist); font-family: var(--font-mono); }
+.amount-input-wrap input { border: none !important; background: transparent !important; font-family: var(--font-mono); font-size: 1.05rem !important; padding: 0.75rem 0.4rem !important; }
+.drawer-panel .btn-primary { width: 100%; margin-top: 0.5rem; }

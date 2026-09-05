@@ -1,0 +1,81 @@
+/* ============================================
+   MÓDULO 9 — Ciclo Menstrual y Finanzas
+   ============================================ */
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+.kpi-card {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.kpi-label { font-size: 0.78rem; color: var(--mist); font-weight: 500; }
+.kpi-value { font-size: 1.4rem; color: var(--parchment); }
+.kpi-value.kpi-clay { color: var(--clay); }
+.kpi-value.blurred { filter: blur(6px); user-select: none; }
+.phase-day { font-size: 0.78rem; color: var(--mist); }
+
+@media (max-width: 720px) { .kpi-row { grid-template-columns: 1fr; } }
+
+.phase-card.menstrual { border-left: 3px solid #C0587A; }
+.phase-card.folicular { border-left: 3px solid #6B8F71; }
+.phase-card.ovulatoria { border-left: 3px solid #C9A227; }
+.phase-card.lutea { border-left: 3px solid #7A6BA8; }
+
+.widgets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 900px) { .widgets-grid { grid-template-columns: 1fr; } }
+
+.widget-card {
+  background: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+}
+.widget-head h2 { font-size: 1rem; color: var(--parchment); margin-bottom: 1rem; }
+
+.forecast-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.88rem;
+}
+.forecast-row:last-child { border-bottom: none; }
+.forecast-row span:first-child { color: var(--parchment-dim); }
+.forecast-row span:last-child { color: var(--mist); font-family: var(--font-mono); font-size: 0.82rem; }
+
+.suggestion-text { font-size: 0.9rem; color: var(--parchment-dim); line-height: 1.6; }
+
+.privacy-note {
+  font-size: 0.78rem;
+  color: var(--mist-dim);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* ---------- Drawer ---------- */
+.drawer-overlay { position: fixed; inset: 0; background: rgba(16, 35, 56, 0.45); display: none; z-index: 50; }
+.drawer-overlay.open { display: block; }
+.drawer-panel {
+  position: absolute; top: 0; right: 0; width: 420px; max-width: 92vw; height: 100%;
+  background: #FFFFFF; color: var(--parchment); padding: 2rem 2rem 2.5rem; overflow-y: auto;
+  box-shadow: -18px 0 40px rgba(16, 35, 56, 0.14);
+}
+.drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.drawer-header h2 { font-size: 1.35rem; color: var(--parchment); }
+.drawer-close { background: var(--graphite); border: none; width: 30px; height: 30px; border-radius: 8px; font-size: 1.2rem; color: var(--mist); cursor: pointer; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.drawer-panel .btn-primary { width: 100%; margin-top: 0.5rem; }

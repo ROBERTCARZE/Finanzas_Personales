@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flujo de Caja — Robert Carrillo Zeña</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="app-shell.css" />
+  <link rel="stylesheet" href="flujo.css" />
+  <script src="sidebar-init.js"></script>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- ============ Riel de navegación ============ -->
+    <aside class="rail">
+      <div class="rail-top">
+        <div class="rail-brand-row">
+          <a href="dashboard.html" class="rail-brand">
+            <img src="logo.png" alt="Robert Carrillo Zeña" />
+            <span class="rail-brand-name">Finanzas</span>
+          </a>
+          <button class="rail-toggle" id="sidebarToggle" aria-label="Contraer barra lateral" data-tooltip="Expandir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+        </div>
+
+        <nav class="rail-nav">
+          <a class="rail-item" href="dashboard.html" data-tooltip="Panel de Control">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/></svg>
+            <span class="label">Panel de Control</span>
+          </a>
+          <div class="rail-section-label">Núcleo Financiero</div>
+          <a class="rail-item" href="transacciones.html" data-tooltip="Transacciones">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h13M17 8l-3.5-3.5M17 8l-3.5 3.5"/><path d="M20 16H7M7 16l3.5-3.5M7 16l3.5 3.5"/></svg>
+            <span class="label">Transacciones</span>
+          </a>
+          <a class="rail-item" href="presupuestos.html" data-tooltip="Presupuestos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5V6M12 18v2.5M3.5 12H6M18 12h2.5"/></svg>
+            <span class="label">Presupuestos</span>
+          </a>
+          <a class="rail-item" href="cuentas.html" data-tooltip="Cuentas y Activos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 9.5 12 4l8.5 5.5"/><path d="M4.5 9.5v9M9 9.5v9M15 9.5v9M19.5 9.5v9"/><path d="M3 19h18"/></svg>
+            <span class="label">Cuentas y Activos</span>
+          </a>
+          <a class="rail-item" href="objetivos.html" data-tooltip="Objetivos de Ahorro">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3.5v17"/><path d="M6 4.5h11l-3 3.5 3 3.5H6"/></svg>
+            <span class="label">Objetivos de Ahorro</span>
+          </a>
+          <div class="rail-section-label">Planificación y Flujo</div>
+          <a class="rail-item" href="recibos.html" data-tooltip="Recibos y Suscripciones">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4v5h5"/><path d="M20 20v-5h-5"/><path d="M4.6 15a8 8 0 0 0 13.8 3.5M19.4 9A8 8 0 0 0 5.6 5.5"/></svg>
+            <span class="label">Recibos y Suscripciones</span>
+          </a>
+          <a class="rail-item active" href="flujo.html" data-tooltip="Flujo de Caja">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20h16"/><path d="M4.5 17l4-5 4 3 5-7 3 3"/></svg>
+            <span class="label">Flujo de Caja</span>
+          </a>
+          <a class="rail-item" href="pendientes.html" data-tooltip="Pendientes">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="4" height="4" rx="1"/><path d="M11 7h9"/><rect x="4" y="15" width="4" height="4" rx="1"/><path d="M11 17h9"/></svg>
+            <span class="label">Pendientes</span>
+          </a>
+          <div class="rail-section-label">Estilo de Vida y Salud</div>
+          <a class="rail-item" href="ciclo.html" data-tooltip="Ciclo Menstrual">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3.5C12 3.5 6 11 6 15.5a6 6 0 0 0 12 0C18 11 12 3.5 12 3.5Z"/></svg>
+            <span class="label">Ciclo Menstrual</span>
+          </a>
+          <a class="rail-item" href="horario.html" data-tooltip="Horario Personal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+            <span class="label">Horario Personal</span>
+          </a>
+          <a class="rail-item" href="gimnasio.html" data-tooltip="Registro de Gimnasio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h2.5M17.5 12H20M6.5 8.5v7M17.5 8.5v7M9 12h6"/></svg>
+            <span class="label">Registro de Gimnasio</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="rail-footer">
+        <button class="rail-item" id="privacyBtn" data-tooltip="Modo discreto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span class="label">Modo discreto</span>
+        </button>
+        <button class="rail-item" id="logoutBtn" data-tooltip="Cerrar sesión">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 20H5.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1H9"/><path d="M16 16.5 21 12l-5-4.5"/><path d="M21 12H9"/></svg>
+          <span class="label">Cerrar sesión</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ============ Área principal ============ -->
+    <main class="main-area">
+
+      <header class="page-header">
+        <div>
+          <h1>Flujo de Caja</h1>
+          <p class="page-subtitle">Proyección automática de tu liquidez, combinando tu saldo actual con tus recibos programados y tu gasto habitual.</p>
+        </div>
+        <div class="horizon-toggle" id="horizonToggle">
+          <button type="button" data-days="30" class="active">30 días</button>
+          <button type="button" data-days="60">60 días</button>
+          <button type="button" data-days="90">90 días</button>
+        </div>
+      </header>
+
+      <section class="alerts-stack" id="alertsStack"></section>
+
+      <section class="kpi-row">
+        <div class="kpi-card">
+          <span class="kpi-label">Saldo líquido actual</span>
+          <span class="kpi-value mono" id="kpiCurrent">S/ 0.00</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Proyección al final del período</span>
+          <span class="kpi-value mono" id="kpiProjected">S/ 0.00</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Punto más bajo proyectado</span>
+          <span class="kpi-value mono" id="kpiLowest">S/ 0.00</span>
+        </div>
+      </section>
+
+      <section class="chart-card">
+        <div class="widget-head"><h2>Proyección de liquidez</h2></div>
+        <div id="chartContainer"></div>
+        <p class="chart-note">Estimado a partir de: tu saldo actual (Módulo 4), tus recibos programados (Módulo 6) y el promedio de tus presupuestos activos (Módulo 3). Es una proyección, no una garantía.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="flujo.js"></script>
+</body>
+</html>
